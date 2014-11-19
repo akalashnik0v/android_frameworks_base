@@ -244,19 +244,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
             .build();
 
-<<<<<<< HEAD
-	private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
-    private static final int BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT = 750; // ms
-    private static final int BRIGHTNESS_CONTROL_LINGER_THRESHOLD = 20;
-
-	private int mStatusBarHeaderHeight;
-
-=======
     private static final float BRIGHTNESS_CONTROL_PADDING = 0.15f;
     private static final int BRIGHTNESS_CONTROL_LONG_PRESS_TIMEOUT = 750; // ms
     private static final int BRIGHTNESS_CONTROL_LINGER_THRESHOLD = 20;
 
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
     public static final int FADE_KEYGUARD_START_DELAY = 100;
     public static final int FADE_KEYGUARD_DURATION = 300;
     public static final int FADE_KEYGUARD_DURATION_PULSING = 96;
@@ -365,12 +356,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     int[] mAbsPos = new int[2];
     ArrayList<Runnable> mPostCollapseRunnables = new ArrayList<>();
 
-<<<<<<< HEAD
-	private boolean mBrightnessControl;
-=======
     private boolean mAutomaticBrightness;
     private boolean mBrightnessControl;
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
     private boolean mBrightnessChanged;
     private float mScreenWidth;
     private int mMinBrightness;
@@ -401,11 +388,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mNavigationIconHints = 0;
     private HandlerThread mHandlerThread;
 
-<<<<<<< HEAD
-	Runnable mLongPressBrightnessChange = new Runnable() {
-=======
     Runnable mLongPressBrightnessChange = new Runnable() {
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
+
         @Override
         public void run() {
             mStatusBarView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
@@ -413,8 +397,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mLinger = BRIGHTNESS_CONTROL_LINGER_THRESHOLD + 1;
         }
     };
-<<<<<<< HEAD
-=======
 
     class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -446,7 +428,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     resolver, Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0) == 1;
         }
     }
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
 
     class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -785,11 +766,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         Resources res = context.getResources();
 
-<<<<<<< HEAD
-		mScreenWidth = (float) context.getResources().getDisplayMetrics().widthPixels;
-=======
         mScreenWidth = (float) context.getResources().getDisplayMetrics().widthPixels;
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
         mMinBrightness = context.getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessDim);
 
@@ -2462,11 +2439,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     }
 
-<<<<<<< HEAD
-	private void adjustBrightness(int x) {
-=======
     private void adjustBrightness(int x) {
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
         mBrightnessChanged = true;
         float raw = ((float) x) / mScreenWidth;
 
@@ -2476,24 +2449,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 Math.max(BRIGHTNESS_CONTROL_PADDING, raw));
         float value = (padded - BRIGHTNESS_CONTROL_PADDING) /
                 (1 - (2.0f * BRIGHTNESS_CONTROL_PADDING));
-<<<<<<< HEAD
-
-        int newBrightness = mMinBrightness + (int) Math.round(value *
-                (android.os.PowerManager.BRIGHTNESS_ON - mMinBrightness));
-        newBrightness = Math.min(newBrightness, android.os.PowerManager.BRIGHTNESS_ON);
-        newBrightness = Math.max(newBrightness, mMinBrightness);
-
-=======
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
         try {
             IPowerManager power = IPowerManager.Stub.asInterface(
                     ServiceManager.getService("power"));
             if (power != null) {
-<<<<<<< HEAD
-                power.setTemporaryScreenBrightnessSettingOverride(newBrightness);
-                Settings.System.putInt(mContext.getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS, newBrightness);
-=======
                 if (mAutomaticBrightness) {
                     float adj = (value * 100) / (BRIGHTNESS_ADJ_RESOLUTION / 2f) - 1;
                     adj = Math.max(adj, -1);
@@ -2525,7 +2484,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
 
 
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Setting Brightness failed: " + e);
@@ -2618,10 +2576,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
         if (mBrightnessChanged && upOrCancel) {
             mBrightnessChanged = false;
-<<<<<<< HEAD
-            if (mJustPeeked && mExpandedVisible) {
-                mNotificationPanel.fling(10, false);
-=======
             if (mJustPeeked) {
                 /**
                  * if we were just peeking, eat the event and collapse the status bar, otherwise
@@ -2635,7 +2589,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
                 disable(mDisabledUnmodified1, mDisabledUnmodified2, true /* animate */);
                 return true;
->>>>>>> b5df3bf... SystemUI : Port forward statusbar brightness control
+            if (mJustPeeked && mExpandedVisible) {
+                mNotificationPanel.fling(10, false);
             }
         }
         return false;
