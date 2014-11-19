@@ -2576,19 +2576,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
         if (mBrightnessChanged && upOrCancel) {
             mBrightnessChanged = false;
-            if (mJustPeeked) {
-                /**
-                 * if we were just peeking, eat the event and collapse the status bar, otherwise
-                 * the event gets passed down and a full expand might happen.
-                 */
-                mNotificationPanel.fling(10, false);
-                if (mExpandedVisible) {
-                    mExpandedVisible = false;
-                    visibilityChanged(false);
-                    setInteracting(StatusBarManager.WINDOW_STATUS_BAR, false);
-                }
-                disable(mDisabledUnmodified1, mDisabledUnmodified2, true /* animate */);
-                return true;
             if (mJustPeeked && mExpandedVisible) {
                 mNotificationPanel.fling(10, false);
             }
