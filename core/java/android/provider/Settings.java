@@ -3559,15 +3559,27 @@ public final class Settings {
          */
         public static final String KEY_APP_SWITCH_LONG_PRESS_ACTION = "key_app_switch_long_press_action";
 
-		/**
-        * Network traffic indicator, goes from least to greatest significant bitwise
-        * 0 = Display up-stream traffic if set
-        * 1 = Display down-stream traffic if set
-        * 2 = Show as Byte/s if set
-        * 16-31 = Refresh interval(ms) min: 250 max: 32750 default: 1000
-        * @hide
-        */
-       public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
+	/**
+         * Network traffic indicator, goes from least to greatest significant bitwise
+         * 0 = Display up-stream traffic if set
+         * 1 = Display down-stream traffic if set
+         * 2 = Show as Byte/s if set
+         * 16-31 = Refresh interval(ms) min: 250 max: 32750 default: 1000
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
+
+        /**
+         * Navigation controls to Use
+         * @hide
+         */
+        public static final String NAV_BUTTONS = "nav_buttons";
+
+        /**
+         * Navigation bar height when it is on protrait
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
 
        /**
         * Network stats Color style
