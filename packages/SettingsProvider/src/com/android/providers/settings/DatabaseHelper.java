@@ -56,6 +56,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -2348,6 +2349,16 @@ class DatabaseHelper extends SQLiteOpenHelper {
             }
         } finally {
             if (stmt != null) stmt.close();
+        }
+    }
+
+    private void loadProtectedSmsSetting(SQLiteStatement stmt) {
+        String[] regAddresses = mContext.getResources()
+                .getStringArray(R.array.def_protected_sms_list_values);
+        if (regAddresses.length > 0) {
+            loadSetting(stmt,
+                    Settings.Secure.PROTECTED_SMS_ADDRESSES,
+                    TextUtils.join("|", regAddresses));
         }
     }
 
