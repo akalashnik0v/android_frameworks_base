@@ -136,10 +136,13 @@
             android:protectionLevel="signature" />
     <uses-permission android:name="com.android.systemui.permission.SELF" />
 
-	<!-- headset icon -->
+    <!-- headset icon -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
-	<!-- Reboot/Recovery tile -->
+    <!-- LiveDisplay -->
+    <uses-permission android:name="android.permission.HARDWARE_ABSTRACTION_ACCESS" />
+
+    <!-- Reboot/Recovery tile -->
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECOVERY" />
 
