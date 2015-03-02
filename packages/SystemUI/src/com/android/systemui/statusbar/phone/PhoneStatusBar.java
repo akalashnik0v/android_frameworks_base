@@ -3798,7 +3798,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     }
                 });
                 if (dismissShade) {
-                    animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE, true /* force */);
+                    animateCollapsePanels(
+                            CommandQueue.FLAG_EXCLUDE_RECENTS_PANEL, true /* force */);
                 }
                 return true;
             }
@@ -3873,7 +3874,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         }
     };
-
     private void resetUserExpandedStates() {
         ArrayList<Entry> activeNotifications = mNotificationData.getActiveNotifications();
         final int notificationCount = activeNotifications.size();
@@ -3921,6 +3921,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         super.userSwitched(newUserId);
         if (MULTIUSER_DEBUG) mNotificationPanelDebugText.setText("USER " + newUserId);
         animateCollapsePanels();
+        updatePublicMode(); 
         updateNotifications();
         resetUserSetupObserver();
         setControllerUsers();
@@ -4583,7 +4584,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     public boolean onSpacePressed() {
         if (mScreenOn != null && mScreenOn
                 && (mState == StatusBarState.KEYGUARD || mState == StatusBarState.SHADE_LOCKED)) {
-            animateCollapsePanels(0 /* flags */, true /* force */);
+            animateCollapsePanels(
+                    CommandQueue.FLAG_EXCLUDE_RECENTS_PANEL /* flags */, true /* force */);
             return true;
         }
         return false;
@@ -5009,7 +5011,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         private final ArrayList<Callback> mCallbacks = new ArrayList<Callback>();
         private final H mHandler = new H();
-
         // Keeps the last reported state by fireNotificationLight.
         private boolean mNotificationLightOn;
 
