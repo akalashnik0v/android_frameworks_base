@@ -391,20 +391,18 @@ public class NavigationBarView extends LinearLayout {
             View one = getCurrentView().findViewById(mVertical ? R.id.sev : R.id.one);
             View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.sev);
             if (showingIme) {
-                if (one.getVisibility() != View.GONE) {
-                    setSideButtonVisibility(true, one.getVisibility());
+                if (mSlotOneVisibility == View.VISIBLE) {
+                    mSlotOneVisibility = one.getVisibility();
                     setVisibleOrGone(one, false);
                 }
-
-                if (sev.getVisibility() != View.GONE) {
-                    setSideButtonVisibility(false, sev.getVisibility());
-                    setVisibleOrGone(sev, false);
+                if (mSlotSixVisibility == View.VISIBLE) {
+                    mSlotSixVisibility = six.getVisibility();
+                    setVisibleOrGone(six, false);
                 }
             } else {
-                if (getSideButtonVisibility(false) != -1) {
-                    sev.setVisibility(getSideButtonVisibility(false));
-                    setSideButtonVisibility(false, -1);
-                }
+                if (mSlotOneVisibility != -1) {
+                    one.setVisibility(mSlotOneVisibility);
+                    mSlotOneVisibility = -1;
             }
         }
     }
