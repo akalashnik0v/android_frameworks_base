@@ -370,6 +370,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private long mKeyguardFadingAwayDelay;
     private long mKeyguardFadingAwayDuration;
 
+    private Bitmap mKeyguardWallpaper;
+
     int mKeyguardMaxNotificationCount;
 
     // carrier/wifi label
@@ -915,6 +917,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (!mDisableNotificationAlerts) {
             addHeadsUpView();
         }
+
+        WallpaperManager wm = (WallpaperManager) mContext.getSystemService(
+                Context.WALLPAPER_SERVICE);
+        mKeyguardWallpaper = wm.getKeyguardBitmap();
 
         mUnlockMethodCache = UnlockMethodCache.getInstance(mContext);
         startKeyguard();
@@ -2378,7 +2384,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             WallpaperManager wm = (WallpaperManager)
                     mContext.getSystemService(Context.WALLPAPER_SERVICE);
             if (wm != null) {
-                backdropBitmap = wm.getKeyguardBitmap();
+                backdropBitmap = mKeyguardWallpaper;
             }
         }
 
@@ -3806,6 +3812,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     updateMediaMetaData(true);
                 }
             } else if (Intent.ACTION_KEYGUARD_WALLPAPER_CHANGED.equals(action)) {
+                WallpaperManager wm = (WallpaperManager) mContext.getSystemService(
+                        Context.WALLPAPER_SERVICE);
+                mKeyguardWallpaper = wm.getKeyguardBitmap();
                 updateMediaMetaData(true);
             }
         }
@@ -3871,6 +3880,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         updateNotifications();
         resetUserSetupObserver();
         setControllerUsers();
+        WallpaperManager wm = (WallpaperManager)
+                mContext.getSystemService(Context.WALLPAPER_SERVICE);
+        mKeyguardWallpaper = wm.getKeyguardBitmap();
     }
 
     private void setControllerUsers() {
