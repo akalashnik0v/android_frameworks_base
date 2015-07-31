@@ -102,11 +102,16 @@ public class NavigationBarView extends LinearLayout {
     private DeadZone mDeadZone;
     private final NavigationBarTransitions mBarTransitions;
 
-    // Visibility of R.id.one view prior to swapping it for a left arrow key
-    public int mSlotOneVisibility = -1;
-
-    // Visibility of R.id.six view prior to swapping it for a right arrow key
-    public int mSlotSixVisibility = -1;
+    /**
+     * Tracks the current visibilities of the far left (R.id.one) and right (R.id.sev) buttons
+     * while dpad arrow keys are visible.
+     *
+     * We keep track of the orientations separately because they can get in different states,
+     * We can be showing dpad arrow keys on vertical, but on portrait that may not be so.
+     */
+    public int[][] mSideButtonVisibilities = new int[][] {
+        {-1, -1} /* portrait */, {-1, -1} /* vertical */
+    };
 
 
     // workaround for LayoutTransitions leaving the nav buttons in a weird state (bug 5549288)
@@ -382,26 +387,25 @@ public class NavigationBarView extends LinearLayout {
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_left), showingIme);
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_right), showingIme);
 
-            View one = getCurrentView().findViewById(mVertical ? R.id.six : R.id.one);
-            View six = getCurrentView().findViewById(mVertical ? R.id.one : R.id.six);
+            View one = getCurrentView().findViewById(mVertical ? R.id.sev : R.id.one);
+            View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.sev);
             if (showingIme) {
-                mSlotOneVisibility = one.getVisibility();
-                mSlotSixVisibility = six.getVisibility();
-                setVisibleOrGone(one, false);
-                setVisibleOrGone(six, false);
-            } else {
-                if (mSlotOneVisibility != -1) {
-                    one.setVisibility(mSlotOneVisibility);
-                    mSlotOneVisibility = -1;
+                if (one.getVisibility() != View.GONE) {
+                    setSideButtonVisibility(true, one.getVisibility());
+                    setVisibleOrGone(one, false);
                 }
-                if (mSlotSixVisibility != -1) {
-                    six.setVisibility(mSlotSixVisibility);
-                    mSlotSixVisibility = -1;
+
+                if (sev.getVisibility() != View.GONE) {
+                    setSideButtonVisibility(false, sev.getVisibility());
+                    setVisibleOrGone(sev, false);
+                }
+            } else {
+                if (getSideButtonVisibility(false) != -1) {
+                    sev.setVisibility(getSideButtonVisibility(false));
+                    setSideButtonVisibility(false, -1);
                 }
             }
         }
-        // Update menu button in case the IME state has changed.
-        setMenuVisibility(mShowMenu, true);
     }
 
     public void setDisabledFlags(int disabledFlags) {
@@ -794,10 +798,14 @@ public class NavigationBarView extends LinearLayout {
             return;
         }
         int visibility = visible ? View.VISIBLE : View.INVISIBLE;
-        if (mSlotOneVisibility != -1 && findView.getId() == R.id.one) {
-            mSlotOneVisibility = visibility;
-        } else if (mSlotSixVisibility != -1 && findView.getId() == R.id.six) {
-            mSlotSixVisibility = visibility;
+        // if we're showing dpad arrow keys (e.g. the side button visibility where it's shown != -1)
+        // then don't actually update that buttons visibility, but update the stored value
+        if (getSideButtonVisibility(true) != -1
+                && findView.getId() == (mVertical ? R.id.sev : R.id.one)) {
+            setSideButtonVisibility(true, visibility);
+        } else if (getSideButtonVisibility(false) != -1
+                && findView.getId() == (mVertical ? R.id.one : R.id.sev)) {
+            setSideButtonVisibility(false, visibility);
         } else {
             findView.setVisibility(visibility);
         }
