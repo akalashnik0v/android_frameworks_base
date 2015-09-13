@@ -3320,8 +3320,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int barMode(int vis, int transientFlag, int translucentFlag) {
         int lightsOutTransparent = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_TRANSPARENT;
         return (vis & transientFlag) != 0 ? MODE_SEMI_TRANSPARENT
-                : (vis & lightsOutTranslucent) == lightsOutTranslucent ? MODE_LIGHTS_OUT_TRANSLUCENT
-                : (vis & translucentFlag) != 0 ? MODE_TRANSLUCENT
                 : (vis & lightsOutTransparent) == lightsOutTransparent ? MODE_LIGHTS_OUT_TRANSPARENT
                 : (vis & View.SYSTEM_UI_TRANSPARENT) != 0 ? MODE_TRANSPARENT
                 : (vis & View.SYSTEM_UI_FLAG_LOW_PROFILE) != 0 ? MODE_LIGHTS_OUT
