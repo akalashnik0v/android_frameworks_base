@@ -3465,6 +3465,12 @@ public final class Settings {
          */
         public static final String EGG_MODE = "egg_mode";
 
+        /**
+         *  Enable navigation bar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_NAVBAR = "double_tap_sleep_navbar";
+
         /** @hide */
         public static final Validator EGG_MODE_VALIDATOR = new Validator() {
             @Override
