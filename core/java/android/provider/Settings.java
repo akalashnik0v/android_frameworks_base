@@ -3782,6 +3782,12 @@ public final class Settings {
          */
         public static final String QS_TILES = "sysui_qs_tiles";
 
+		/**
+         * Whether detail view for the location tile is enabled
+         * @hide
+         */
+        public static final String QS_LOCATION_ADVANCED = "qs_location_advanced";
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
