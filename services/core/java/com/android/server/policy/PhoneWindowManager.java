@@ -846,6 +846,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DEV_FORCE_SHOW_NAVBAR), false, this,
+                    UserHandle.USER_ALL);                    
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.VOLUME_ROCKER_WAKE), false, this,
                     UserHandle.USER_ALL);
