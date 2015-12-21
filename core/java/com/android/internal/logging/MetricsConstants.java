@@ -266,6 +266,7 @@ public interface MetricsConstants {
     // Liquid
     public static final int ABOUT_LIQUID = 243;
     public static final int LIQUID_SETTINGS = 244;
+    public static final int DIRTYTWEAKS= 245;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
