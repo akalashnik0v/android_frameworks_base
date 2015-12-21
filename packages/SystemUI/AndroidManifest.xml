@@ -221,7 +221,7 @@
         </activity>
 
         <receiver android:name=".recents.RecentsUserEventProxyReceiver"
-                  android:exported="false">
+                  android:exported="true">
             <intent-filter>
                 <action android:name="com.android.systemui.recents.action.SHOW_RECENTS_FOR_USER" />
                 <action android:name="com.android.systemui.recents.action.HIDE_RECENTS_FOR_USER" />
