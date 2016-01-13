@@ -3828,7 +3828,7 @@ public final class Settings {
             DISPLAY_TEMPERATURE_DAY,
             DISPLAY_TEMPERATURE_MODE,
             DISPLAY_AUTO_OUTDOOR_MODE,
-            LIVE_DISPLAY_HINTED
+            LIVE_DISPLAY_HINTED,
             STATUS_BAR_BATTERY_STYLE,
             STATUS_BAR_SHOW_BATTERY_PERCENT
         };
