@@ -204,7 +204,7 @@ public class NotificationPanelView extends PanelView implements
     private boolean mQsTouchAboveFalsingThreshold;
     private int mQsFalsingThreshold;
 
-	private Handler mHandler = new Handler();
+    private Handler mHandler = new Handler();
     private SettingsObserver mSettingsObserver;
     private int mOneFingerQuickSettingsInterceptMode;
 
@@ -234,9 +234,6 @@ public class NotificationPanelView extends PanelView implements
     /** Interpolator to be used for animations that respond directly to a touch */
     private final Interpolator mTouchResponseInterpolator =
             new PathInterpolator(0.3f, 0f, 0.1f, 1f);
-
-    private Handler mHandler = new Handler();
-    private SettingsObserver mSettingsObserver;
 
     private boolean mOneFingerQuickSettingsIntercept;
     private boolean mDoubleTapToSleepEnabled;
@@ -2548,10 +2545,6 @@ public class NotificationPanelView extends PanelView implements
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN), false, this);
-            update();
-        }
-
-        void observe() {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE), false, this);
             update();
@@ -2569,17 +2562,10 @@ public class NotificationPanelView extends PanelView implements
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            update();
-        }
-
-        public void update() {
             ContentResolver resolver = mContext.getContentResolver();
             mOneFingerQuickSettingsInterceptMode = Settings.System.getIntForUser(
                     resolver, Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN,
                     ONE_FINGER_QS_INTERCEPT_END, UserHandle.USER_CURRENT);
-        }
-
-        public void update() {
             mDoubleTapToSleepEnabled = Settings.System.getInt(
                     resolver, Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 1) == 1;
         }
