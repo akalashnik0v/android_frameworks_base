@@ -2561,6 +2561,10 @@ public class NotificationPanelView extends PanelView implements
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        public void update() {
             ContentResolver resolver = mContext.getContentResolver();
             mOneFingerQuickSettingsInterceptMode = Settings.System.getIntForUser(
                     resolver, Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN,
