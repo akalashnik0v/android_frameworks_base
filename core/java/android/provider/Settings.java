@@ -3538,6 +3538,12 @@ public final class Settings {
         public static final String GESTURES_DOUBLE_TAP = "gestures_double_tap";
 
         /**
+         * Navigation bar button color master switch
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_TINT_SWITCH = "navigation_bar_tint_switch";
+
+        /**
          * Whether lock-to-app will be triggered by long-press on recents.
          * @hide
          */
@@ -3546,7 +3552,7 @@ public final class Settings {
         /** @hide */
         public static final Validator LOCK_TO_APP_ENABLED_VALIDATOR = sBooleanValidator;
 
-		/**
+	/**
          * Enable looking up of phone numbers of nearby places
          *
          * @hide
