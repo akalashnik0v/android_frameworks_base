@@ -53,6 +53,7 @@ import android.widget.ImageView;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.NavbarEditor;
+import com.android.systemui.statusbar.phone.NavigationBarView;
 
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK;
