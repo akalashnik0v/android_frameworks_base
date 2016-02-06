@@ -1343,7 +1343,6 @@ public final class ActivityManagerService extends ActivityManagerNative
     static final int SERVICE_TIMEOUT_MSG = 12;
     static final int UPDATE_TIME_ZONE = 13;
     static final int SHOW_UID_ERROR_MSG = 14;
-    static final int SHOW_FINGERPRINT_ERROR_MSG = 15;
     static final int PROC_START_TIMEOUT_MSG = 20;
     static final int DO_PENDING_ACTIVITY_LAUNCHES_MSG = 21;
     static final int KILL_APPLICATION_MSG = 22;
@@ -1562,18 +1561,6 @@ public final class ActivityManagerService extends ActivityManagerNative
                     d.setCancelable(false);
                     d.setTitle(mContext.getText(R.string.android_system_label));
                     d.setMessage(mContext.getText(R.string.system_error_wipe_data));
-                    d.setButton(DialogInterface.BUTTON_POSITIVE, mContext.getText(R.string.ok),
-                            obtainMessage(DISMISS_DIALOG_MSG, d));
-                    d.show();
-                }
-            } break;
-            case SHOW_FINGERPRINT_ERROR_MSG: {
-                if (mShowDialogs) {
-                    AlertDialog d = new BaseErrorDialog(mContext);
-                    d.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ERROR);
-                    d.setCancelable(false);
-                    d.setTitle(mContext.getText(R.string.android_system_label));
-                    d.setMessage(mContext.getText(R.string.system_error_manufacturer));
                     d.setButton(DialogInterface.BUTTON_POSITIVE, mContext.getText(R.string.ok),
                             obtainMessage(DISMISS_DIALOG_MSG, d));
                     d.show();
@@ -11958,11 +11945,6 @@ public final class ActivityManagerService extends ActivityManagerNative
                     mUiHandler.obtainMessage(SHOW_UID_ERROR_MSG).sendToTarget();
                 }
             } catch (RemoteException e) {
-            }
-
-            if (!Build.isBuildConsistent()) {
-                Slog.e(TAG, "Build fingerprint is not consistent, warning user");
-                mUiHandler.obtainMessage(SHOW_FINGERPRINT_ERROR_MSG).sendToTarget();
             }
 
             long ident = Binder.clearCallingIdentity();
