@@ -204,8 +204,7 @@ class AutomaticBrightnessController {
             SensorManager sensorManager, Spline autoBrightnessSpline, int lightSensorWarmUpTime,
             int brightnessMin, int brightnessMax, float dozeScaleFactor,
             int lightSensorRate, long brighteningLightDebounceConfig,
-            long darkeningLightDebounceConfig, boolean resetAmbientLuxAfterWarmUpConfig,
-            LiveDisplayController ldc) {
+            long darkeningLightDebounceConfig, boolean resetAmbientLuxAfterWarmUpConfig) {
         mContext = context;
         mCallbacks = callbacks;
         mTwilight = LocalServices.getService(TwilightManager.class);
@@ -215,7 +214,6 @@ class AutomaticBrightnessController {
         mScreenBrightnessRangeMaximum = brightnessMax;
         mLightSensorWarmUpTimeConfig = lightSensorWarmUpTime;
         mDozeScaleFactor = dozeScaleFactor;
-        mLiveDisplay = ldc;
         mLightSensorRate = lightSensorRate;
         mBrighteningLightDebounceConfig = brighteningLightDebounceConfig;
         mDarkeningLightDebounceConfig = darkeningLightDebounceConfig;
@@ -231,6 +229,7 @@ class AutomaticBrightnessController {
         if (USE_TWILIGHT_ADJUSTMENT) {
             mTwilight.registerListener(mTwilightListener, mHandler);
         }
+        mLiveDisplay = new LiveDisplayController(mContext, looper);
     }
 
     public int getAutomaticScreenBrightness() {
@@ -286,6 +285,7 @@ class AutomaticBrightnessController {
         pw.println("  mScreenAutoBrightnessAdjustment=" + mScreenAutoBrightnessAdjustment);
         pw.println("  mLastScreenAutoBrightnessGamma=" + mLastScreenAutoBrightnessGamma);
         pw.println("  mDozing=" + mDozing);
+        mLiveDisplay.dump(pw);;
     }
 
     private boolean setLightSensorEnabled(boolean enable) {
