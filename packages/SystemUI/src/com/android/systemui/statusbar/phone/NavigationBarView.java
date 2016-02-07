@@ -434,8 +434,8 @@ public class NavigationBarView extends LinearLayout {
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_left), showingIme);
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_right), showingIme);
 
-            View one = getCurrentView().findViewById(mVertical ? R.id.six : R.id.one);
-            View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.six);
+            View one = getCurrentView().findViewById(mVertical ? R.id.sev : R.id.one);
+            View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.sev);
             if (showingIme) {
                 if (one.getVisibility() != View.GONE) {
                     setSideButtonVisibility(true, one.getVisibility());
@@ -443,7 +443,7 @@ public class NavigationBarView extends LinearLayout {
                 }
 
                 if (six.getVisibility() != View.GONE) {
-                    setSideButtonVisibility(false, six.getVisibility());
+                    setSideButtonVisibility(false, sev.getVisibility());
                     setVisibleOrGone(six, false);
                 }
             } else {
@@ -452,7 +452,7 @@ public class NavigationBarView extends LinearLayout {
                     setSideButtonVisibility(true, - 1);
                 }
                 if (getSideButtonVisibility(false) != -1) {
-                    six.setVisibility(getSideButtonVisibility(false));
+                    sev.setVisibility(getSideButtonVisibility(false));
                     setSideButtonVisibility(false, -1);
                 }
             }
@@ -994,7 +994,6 @@ public class NavigationBarView extends LinearLayout {
                     Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 0,
                     UserHandle.USER_CURRENT) == 1);
         }
-    }
 
     private Runnable mNavButtonDimmer = new Runnable() {
         public void run() {
