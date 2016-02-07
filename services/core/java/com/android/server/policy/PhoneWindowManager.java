@@ -949,12 +949,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 target = mStatusBar;
             } else if (position == EdgeGesturePosition.BOTTOM && mNavigationBarOnBottom) {
                 target = mNavigationBar;
-<<<<<<< HEAD
             } else if (position == EdgeGesturePosition.LEFT
                     && !mNavigationBarOnBottom && mNavigationBarLeftInLandscape) {
                 target = mNavigationBar;
-=======
->>>>>>> c2d7eba... PhoneWindowManager: add ability to use EdgeGestureService for system gestures.
             } else if (position == EdgeGesturePosition.RIGHT && !mNavigationBarOnBottom) {
                 target = mNavigationBar;
             }
