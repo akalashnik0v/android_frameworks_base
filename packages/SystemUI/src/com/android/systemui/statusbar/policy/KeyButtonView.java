@@ -157,27 +157,6 @@ public class KeyButtonView extends ImageView {
         return super.performAccessibilityActionInternal(action, arguments);
     }
 
-    @Override
-    public Resources getResources() {
-        ThemeConfig themeConfig = mContext.getResources().getConfiguration().themeConfig;
-        Resources res = null;
-        if (themeConfig != null) {
-            try {
-                final String navbarThemePkgName = themeConfig.getOverlayForNavBar();
-                final String sysuiThemePkgName = themeConfig.getOverlayForStatusBar();
-                // Check if the same theme is applied for systemui, if so we can skip this
-                if (navbarThemePkgName != null && !navbarThemePkgName.equals(sysuiThemePkgName)) {
-                    res = mContext.getPackageManager().getThemedResourcesForApplication(
-                            mContext.getPackageName(), navbarThemePkgName);
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                // don't care since we'll handle res being null below
-            }
-        }
-
-        return res != null ? res : super.getResources();
-    }
-
     public void setEditMode(boolean editMode) {
         mInEditMode = editMode;
         updateVisibility();
