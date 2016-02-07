@@ -2420,36 +2420,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             IPowerManager power = IPowerManager.Stub.asInterface(
                     ServiceManager.getService("power"));
             if (power != null) {
-                if (mAutomaticBrightness) {
-                    float adj = (2 * value) - 1;
-                    adj = Math.max(adj, -1);
-                    adj = Math.min(adj, 1);
-                    final float val = adj;
-                    power.setTemporaryScreenAutoBrightnessAdjustmentSettingOverride(val);
-                    AsyncTask.execute(new Runnable() {
-                        public void run() {
-                            Settings.System.putFloatForUser(mContext.getContentResolver(),
-                                    Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, val,
-                                    UserHandle.USER_CURRENT);
-                        }
-                    });
-                } else {
-                    int newBrightness = mMinBrightness + (int) Math.round(value *
-                            (android.os.PowerManager.BRIGHTNESS_ON - mMinBrightness));
-                    newBrightness = Math.min(newBrightness, android.os.PowerManager.BRIGHTNESS_ON);
-                    newBrightness = Math.max(newBrightness, mMinBrightness);
-                    final int val = newBrightness;
-                    power.setTemporaryScreenBrightnessSettingOverride(val);
-                    AsyncTask.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            Settings.System.putIntForUser(mContext.getContentResolver(),
-                                    Settings.System.SCREEN_BRIGHTNESS, val,
-                                    UserHandle.USER_CURRENT);
-                        }
-                    });
-                }
-
+                power.setTemporaryScreenBrightnessSettingOverride(newBrightness);
+                Settings.System.putInt(mContext.getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS, newBrightness);
             }
         } catch (RemoteException e) {
             Log.w(TAG, "Setting Brightness failed: " + e);
