@@ -216,21 +216,6 @@ public class NavigationBarView extends LinearLayout {
         }
     };
 
-    public void onNavButtonTouched() {
-        mHandler.removeCallbacks(mNavButtonDimmer);
-        if (getNavButtons() != null) {
-            if (mIsDim || mIsAnimating) {
-                mIsAnimating = false;
-                getNavButtons().clearAnimation();
-                mIsDim = false;
-                getNavButtons().setAlpha(mOriginalAlpha);
-            }
-            if (mDimNavButtons) {
-                mHandler.postDelayed(mNavButtonDimmer, mDimNavButtonsTimeout);
-            }
-        }
-    }
-
     private class H extends Handler {
         public void handleMessage(Message m) {
             switch (m.what) {
@@ -442,9 +427,9 @@ public class NavigationBarView extends LinearLayout {
                     setVisibleOrGone(one, false);
                 }
 
-                if (six.getVisibility() != View.GONE) {
+                if (sev.getVisibility() != View.GONE) {
                     setSideButtonVisibility(false, sev.getVisibility());
-                    setVisibleOrGone(six, false);
+                    setVisibleOrGone(sev, false);
                 }
             } else {
                 if (getSideButtonVisibility(true) != -1) {
