@@ -434,8 +434,8 @@ public class NavigationBarView extends LinearLayout {
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_left), showingIme);
             setVisibleOrGone(getCurrentView().findViewById(R.id.dpad_right), showingIme);
 
-            View one = getCurrentView().findViewById(mVertical ? R.id.sev : R.id.one);
-            View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.sev);
+            View one = getCurrentView().findViewById(mVertical ? R.id.six : R.id.one);
+            View sev = getCurrentView().findViewById(mVertical ? R.id.one : R.id.six);
             if (showingIme) {
                 if (one.getVisibility() != View.GONE) {
                     setSideButtonVisibility(true, one.getVisibility());
