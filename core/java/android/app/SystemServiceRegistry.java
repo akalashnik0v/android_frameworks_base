@@ -98,7 +98,6 @@ import android.os.Vibrator;
 import android.os.storage.StorageManager;
 import android.print.IPrintManager;
 import android.print.PrintManager;
-import android.hardware.CmHardwareManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.IFingerprintService;
 import android.service.persistentdata.IPersistentDataBlockService;
@@ -705,13 +704,6 @@ final class SystemServiceRegistry {
             public RadioManager createService(ContextImpl ctx) {
                 return new RadioManager(ctx);
             }});
-
-        registerService(Context.CMHW_SERVICE, CmHardwareManager.class,
-                new CachedServiceFetcher<CmHardwareManager>() {
-             @Override
-             public CmHardwareManager createService(ContextImpl ctx) {
-                return new CmHardwareManager(ctx);
-           }});
     }
 
     /**
