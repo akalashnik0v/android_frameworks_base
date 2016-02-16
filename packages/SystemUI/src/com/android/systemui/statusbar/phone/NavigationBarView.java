@@ -398,9 +398,9 @@ public class NavigationBarView extends LinearLayout {
                     setVisibleOrGone(one, false);
                 }
 
-                if (six.getVisibility() != View.GONE) {
-                    setSideButtonVisibility(false, six.getVisibility());
-                    setVisibleOrGone(six, false);
+                if (sev.getVisibility() != View.GONE) {
+                    setSideButtonVisibility(false, sev.getVisibility());
+                    setVisibleOrGone(sev, false);
                 }
             } else {
                 if (getSideButtonVisibility(true) != -1) {
@@ -408,7 +408,7 @@ public class NavigationBarView extends LinearLayout {
                     setSideButtonVisibility(true, - 1);
                 }
                 if (getSideButtonVisibility(false) != -1) {
-                    six.setVisibility(getSideButtonVisibility(false));
+                    sev.setVisibility(getSideButtonVisibility(false));
                     setSideButtonVisibility(false, -1);
                 }
             }
