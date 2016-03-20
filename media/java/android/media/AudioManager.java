@@ -26,7 +26,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RemoteController.OnClientUpdateListener;
 import android.media.audiopolicy.AudioPolicy;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
