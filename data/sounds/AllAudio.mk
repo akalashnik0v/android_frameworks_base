@@ -41,6 +41,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/notifications/ogg/Adara.ogg:system/media/audio/notifications/Adara.ogg \
     $(LOCAL_PATH)/notifications/Aldebaran.ogg:system/media/audio/notifications/Aldebaran.ogg \
     $(LOCAL_PATH)/notifications/Altair.ogg:system/media/audio/notifications/Altair.ogg \
+    $(LOCAL_PATH)/notifications/Bike.ogg:system/media/audio/notifications/Bike.ogg \
+    $(LOCAL_PATH)/notifications/Laser.ogg:system/media/audio/notifications/Laser.ogg \
+    $(LOCAL_PATH)/notifications/Youve_Got_Mail.ogg:system/media/audio/notifications/Youve_Got_Mail.ogg \
     $(LOCAL_PATH)/notifications/ogg/Alya.ogg:system/media/audio/notifications/Alya.ogg \
     $(LOCAL_PATH)/notifications/Antares.ogg:system/media/audio/notifications/Antares.ogg \
     $(LOCAL_PATH)/notifications/ogg/Antimony.ogg:system/media/audio/notifications/Antimony.ogg \
